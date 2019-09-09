@@ -36,7 +36,7 @@ public class IndexServlet extends HttpServlet {
         // TODO Auto-generated method stub
         EntityManager em = DBUtil.createEntityManager();
 
-        List<Message> tasks = em.createNamedQuery("getAlltasks", Message.class)
+        List<Message> tasks = em.createNamedQuery("getAllTasks", Message.class)
                                    .getResultList();
 
         em.close();
