@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Message;
+import models.Task;
 import utils.DBUtil;
 
 /**
@@ -42,19 +42,19 @@ public class IndexServlet extends HttpServlet {
         } catch(NumberFormatException e) {}
 
 
-        List<Message> task = em.createNamedQuery("getAllTask", Message.class)
+        List<Task> tasks = em.createNamedQuery("getAllTasks", Task.class)
                                    .setFirstResult(10 * (page - 1))
                                    .setMaxResults(10)
                                    .getResultList();
 
 
-        long task_count = (long)em.createNamedQuery("getTaskCount", Long.class)
+        long tasks_count = (long)em.createNamedQuery("getTaskCount", Long.class)
                                       .getSingleResult();
 
         em.close();
 
-        request.setAttribute("task", task);
-        request.setAttribute("task_count", task_count);
+        request.setAttribute("tasks", tasks);
+        request.setAttribute("tasks_count", tasks_count);
         request.setAttribute("page", page);
 
 
@@ -65,7 +65,7 @@ public class IndexServlet extends HttpServlet {
         }
 
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/task/index.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/index.jsp");
         rd.forward(request, response);
 
     }
