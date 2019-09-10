@@ -13,16 +13,16 @@ import javax.persistence.Table;
 @Entity
 @NamedQueries({
     @NamedQuery(
-            name = "getAllTasks",
+            name = "getAllTask",
             query = "SELECT m FROM Message AS m ORDER BY m.id DESC"
             ),
     @NamedQuery(
-            name = "getTasksCount",
+            name = "getTaskCount",
             query = "SELECT COUNT(m) FROM Message AS m"
             )
 })
 
-@Table(name ="tasks")
+@Table(name ="task")
 public class Message {
     @Id
     @Column(name = "id")

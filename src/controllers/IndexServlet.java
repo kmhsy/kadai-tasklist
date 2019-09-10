@@ -42,19 +42,19 @@ public class IndexServlet extends HttpServlet {
         } catch(NumberFormatException e) {}
 
 
-        List<Message> tasks = em.createNamedQuery("getAllTasks", Message.class)
+        List<Message> task = em.createNamedQuery("getAllTask", Message.class)
                                    .setFirstResult(10 * (page - 1))
                                    .setMaxResults(10)
                                    .getResultList();
 
 
-        long tasks_count = (long)em.createNamedQuery("getTasksCount", Long.class)
+        long task_count = (long)em.createNamedQuery("getTaskCount", Long.class)
                                       .getSingleResult();
 
         em.close();
 
-        request.setAttribute("tasks", tasks);
-        request.setAttribute("tasks_count", tasks_count);
+        request.setAttribute("task", task);
+        request.setAttribute("task_count", task_count);
         request.setAttribute("page", page);
 
 
@@ -65,7 +65,7 @@ public class IndexServlet extends HttpServlet {
         }
 
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/index.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/task/index.jsp");
         rd.forward(request, response);
 
     }
